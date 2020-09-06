@@ -1,5 +1,4 @@
 const createWarpedImage = () => {
-  const originalImg = document.getElementById('img');
   const width = originalImg.offsetWidth,
     height = originalImg.offsetHeight,
     buffer = new Uint8ClampedArray(width * height * 4); // have enough bytes
@@ -15,11 +14,10 @@ const createWarpedImage = () => {
   }
 
   // create off-screen canvas element
-  const canvas = document.getElementById('warpedImg'),
-    ctx = canvas.getContext('2d');
+  const ctx = warpedImg.getContext('2d');
 
-  canvas.width = width;
-  canvas.height = height;
+  warpedImg.width = width;
+  warpedImg.height = height;
 
   // create imageData object
   const idata = ctx.createImageData(width, height);
@@ -31,4 +29,4 @@ const createWarpedImage = () => {
   ctx.putImageData(idata, 0, 0);
 };
 
-createWarpedImage();
+warpButton.addEventListener('click', createWarpedImage);
