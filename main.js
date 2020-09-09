@@ -1,6 +1,6 @@
 // DOM Elements
 const originalImg = document.getElementById('img');
-originalImg.crossOrigin = 'Anonymous';
+// originalImg.crossOrigin = 'Anonymous';
 const warpedImg = document.getElementById('warpedImg');
 const warpButton = document.getElementById('warpButton');
 const resetButton = document.getElementById('resetButton');
