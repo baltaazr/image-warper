@@ -150,6 +150,11 @@ const createWarpedImage = () => {
 
   // update canvas with new data
   ctx.putImageData(idata, 0, 0);
+
+  spinner.style.display = 'none';
 };
 
-warpButton.addEventListener('click', createWarpedImage);
+warpButton.addEventListener('click', () => {
+  spinner.style.display = 'inline-block';
+  setTimeout(createWarpedImage, 1000);
+});
