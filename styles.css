@@ -8,6 +8,14 @@
   background-color: rgb(255, 0, 0, 0.5);
 }
 
+.line {
+  position: absolute;
+  height: 10px;
+  width: 100px;
+  background-color: rgb(255, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
 .spinner {
   display: none;
   width: 2rem;

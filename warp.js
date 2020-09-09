@@ -3,24 +3,14 @@ let width = 0;
 let height = 0;
 
 const getPositionedCorners = () => {
-  const topLeft = corners.reduce((prev, current) => {
-    return prev.x + prev.y < current.x + current.y ? prev : current;
-  });
-  const botRight = corners.reduce((prev, current) => {
-    return prev.x + prev.y > current.x + current.y ? prev : current;
-  });
-  const remainingDots = corners.filter(
-    (coords) => coords !== topLeft && coords !== botRight
-  );
-  const topRight =
-    remainingDots[0].y < remainingDots[1].y
-      ? remainingDots.splice(0, 1)[0]
-      : remainingDots.splice(1, 1)[0];
-  const botLeft = remainingDots[0];
+  startingPos = { x: corners[0].x, y: corners[0].y };
 
-  startingPos = { x: topLeft.x, y: topLeft.y };
-
-  return { topLeft, topRight, botLeft, botRight };
+  return {
+    topLeft: corners[0],
+    topRight: corners[1],
+    botRight: corners[2],
+    botLeft: corners[3]
+  };
 };
 
 const getNormalizedCorners = () => {
