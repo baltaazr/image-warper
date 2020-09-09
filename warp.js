@@ -27,8 +27,20 @@ const getNormalizedCorners = () => {
   const positionedCorners = getPositionedCorners();
 
   let { topLeft, topRight, botLeft, botRight } = positionedCorners;
-  width = botRight.x - topLeft.x;
-  height = botRight.y - topLeft.y;
+  width = Math.round(
+    (Math.sqrt((topLeft.x - topRight.x) ** 2 + (topLeft.y - topRight.y) ** 2) +
+      Math.sqrt(
+        (botLeft.x - botRight.x) ** 2 + (botLeft.y - botRight.y) ** 2
+      )) /
+      2
+  );
+  height = Math.round(
+    (Math.sqrt((topLeft.x - botLeft.x) ** 2 + (topLeft.y - botLeft.y) ** 2) +
+      Math.sqrt(
+        (topRight.x - botRight.x) ** 2 + (topRight.y - botRight.y) ** 2
+      )) /
+      2
+  );
 
   topRight = {
     x: (topRight.x - topLeft.x) / width,
@@ -38,12 +50,16 @@ const getNormalizedCorners = () => {
     x: (botLeft.x - topLeft.x) / width,
     y: (botLeft.y - topLeft.y) / height
   };
+  botRight = {
+    x: (botRight.x - topLeft.x) / width,
+    y: (botRight.y - topLeft.y) / height
+  };
 
   return {
     topLeft: { x: 0, y: 0 },
     topRight,
     botLeft,
-    botRight: { x: 1, y: 1 }
+    botRight
   };
 };
 
