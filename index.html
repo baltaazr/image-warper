@@ -13,11 +13,26 @@
       <canvas id="warpedImg" />
     </div>
     <div>
+      <p>
+        <input
+          type="file"
+          accept="image/*"
+          name="image"
+          id="file"
+          onchange="loadFile(event)"
+          style="display: none"
+        />
+      </p>
+      <p><label for="file" style="cursor: pointer">Upload Image</label></p>
+    </div>
+    <br />
+    <div>
       <button id="warpButton" disabled>Warp</button>
       <button id="resetButton">Reset Corner Selection</button>
     </div>
     <div class="dot" id="dotCursor" />
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="warp.js"></script>
+    <script type="text/javascript" src="imageLoader.js"></script>
   </body>
 </html>
