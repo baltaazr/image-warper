@@ -47,7 +47,7 @@ const getNormalizedCorners = () => {
   };
 };
 
-const getProjMat = () => {
+const getM = () => {
   const {
     topLeft: { x: x0, y: y0 },
     topRight: { x: x1, y: y1 },
@@ -88,31 +88,18 @@ const getProjMat = () => {
   ]);
 
   const [[a], [b], [c], [d], [e], [f], [g], [h]] = aToH;
-  const i = 1;
 
-  const projMat = [
+  const M = [
     [a, b, c],
     [d, e, f],
-    [g, h, i]
+    [g, h, 1]
   ];
 
-  console.log(x0, y0);
-  console.log(math.multiply(projMat, [[u0], [v0], [1]]));
-
-  console.log(x1, y1);
-  console.log(math.multiply(projMat, [[u1], [v1], [1]]));
-
-  console.log(x2, y2);
-  console.log(math.multiply(projMat, [[u2], [v2], [1]]));
-
-  console.log(x3, y3);
-  console.log(math.multiply(projMat, [[u3], [v3], [1]]));
-
-  return projMat;
+  return M;
 };
 
 const createWarpedImage = () => {
-  const projMat = getProjMat();
+  const M = getM();
 
   const { width: imgWidth, height: imgHeight } = originalImg;
 
@@ -127,15 +114,13 @@ const createWarpedImage = () => {
 
   for (let v = 0; v < height; v++) {
     for (let u = 0; u < width; u++) {
-      let [[x], [y], [w]] = math.multiply(projMat, [
-        [u / width],
-        [v / height],
-        [1]
-      ]);
+      let [[x], [y], [w]] = math.multiply(M, [[u / width], [v / height], [1]]);
 
+      x /= w;
       x *= width;
       x += startingPos.x;
 
+      y /= w;
       y *= height;
       y += startingPos.y;
 
